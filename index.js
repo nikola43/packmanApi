@@ -11,7 +11,7 @@ app.use(express.json())    // <==== parse request body as JSON
 const packmanAddress = "0x5b86F39d4333d6825b1a038C438a5753AB056247"
 const pvkey = process.env.PRIVATE_KEY;
 
-const provider = new ethers.getDefaultProvider("https://rpc.ankr.com/polygon_mumbai");
+const provider = new ethers.providers.JsonRpcProvider("https://rpc.ankr.com/polygon_mumbai");
 const wallet = new ethers.Wallet(pvkey, provider)
 const packmanContract = new ethers.Contract(packmanAddress, packmanAbi, wallet);
 
