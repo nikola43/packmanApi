@@ -39,7 +39,7 @@ app.post('/updateWinnerScore', async (req, res) => {
     console.log(winnerAddress, winnerScore);
 
     try {
-        const tx = await packmanContract.updateWinnerScore(winnerAddress, winnerScore);
+        const tx = await packmanContract.setPlayerScore(winnerAddress, winnerScore);
         res.send({tx: tx.hash});
     } catch (error) {
         res.send(error.toString());
