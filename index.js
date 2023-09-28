@@ -8,7 +8,7 @@ dotenv.config();
 const app = express();
 app.use(express.json())    // <==== parse request body as JSON
 
-const packmanAddress = "0xe16062e0BAc9BAefB3f934DD8093D670D11f16Aa"
+const packmanAddress = "0x36858A3C5D7afCf0416DC13cfb618e3098976Ee9"
 const pvkey = process.env.PRIVATE_KEY;
 
 const provider = new ethers.providers.JsonRpcProvider("https://rpc.ankr.com/polygon_mumbai");
@@ -21,16 +21,7 @@ app.use(cors({
 }));
 
 app.get('/', async (req, res) => {
-    let score = 0;
-    try {
-        score = await packmanContract.highScore();
-        console.log(score);
-    } catch (error) {
-        console.log(error);
-        res.send(error);
-    }
-
-    res.send(score.toString());
+    res.send("Hello World");
 })
 
 app.post('/updateWinnerScore', async (req, res) => {
