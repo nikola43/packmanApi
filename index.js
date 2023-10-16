@@ -26,7 +26,7 @@ app.get('/', async (req, res) => {
 
 app.get('/getHighScore', async (req, res) => {
     const highScore = await packmanContract.highScore();
-    res.send({ highScore: ethers.utils.parseEther(highScore) });
+    res.send({ highScore: ethers.utils.formatEther(highScore) });
 })
 
 app.get('/getRanking', async (req, res) => {
