@@ -26,12 +26,12 @@ app.get('/', async (req, res) => {
 
 app.get('/getHighScore', async (req, res) => {
     const highScore = await packmanContract.highScore();
-    res.send({ highScore });
+    res.send({ highScore: ethers.utils.parseEther(highScore) });
 })
 
 app.get('/getRanking', async (req, res) => {
     const ranking = await packmanContract.getRanking();
-    res.send({ getRanking });
+    res.send({ ranking });
 })
 
 app.post('/updateWinnerScore', async (req, res) => {
