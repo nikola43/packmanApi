@@ -24,6 +24,16 @@ app.get('/', async (req, res) => {
     res.send("Hello World");
 })
 
+app.get('/getHighScore', async (req, res) => {
+    const highScore = await packmanContract.highScore();
+    res.send({ highScore });
+})
+
+app.get('/getRanking', async (req, res) => {
+    const ranking = await packmanContract.getRanking();
+    res.send({ getRanking });
+})
+
 app.post('/updateWinnerScore', async (req, res) => {
     const winnerAddress = req.body.winnerAddress;
     const winnerScore = req.body.winnerScore;
@@ -31,7 +41,7 @@ app.post('/updateWinnerScore', async (req, res) => {
 
     try {
         const tx = await packmanContract.setPlayerScore(winnerAddress, winnerScore);
-        res.send({tx: tx.hash});
+        res.send({ tx: tx.hash });
     } catch (error) {
         res.send(error.toString());
     }
