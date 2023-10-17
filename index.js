@@ -35,7 +35,22 @@ app.get('/getHighScore', async (req, res) => {
 
 app.get('/getRanking', async (req, res) => {
     const ranking = await packmanContract.getRanking();
-    res.send({ ranking });
+    const rankingData = []
+
+    ranking.map((item, index) => {
+        const scoreBN = item[1]
+        const score = ethers.utils.formatEther(scoreBN)
+        rankingData.push({
+            address: item[0],
+            score: parseInt(score.replace(/^0*\./, ''))
+        })
+
+        rankingData.sort((a, b) => {
+            return b.score - a.score;
+        });
+    })
+
+    res.send(rankingData);
 })
 
 app.post('/updateWinnerScore', async (req, res) => {
@@ -51,6 +66,6 @@ app.post('/updateWinnerScore', async (req, res) => {
     }
 })
 
-app.listen(3000, () => {
-    console.log("Server running on port 3000");
+app.listen(3001, () => {
+    console.log("Server running http://localhost:3001");
 })
